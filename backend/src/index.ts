@@ -3,12 +3,13 @@ import dotenv from 'dotenv';
 import { prisma } from './prisma';
 import {authRouter} from './routes/user';
 import {homePageRouter} from './routes/homePage';
-
+import cors from 'cors';
 
 dotenv.config();
 
 const app = express();
 app.use(express.json())
+app.use(cors({origin: 'http://localhost:5173'}));
 app.use ( "/auth",authRouter);
 app.use( "/api", homePageRouter);
 const PORT = process.env.PORT || 3000;

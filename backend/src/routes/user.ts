@@ -6,8 +6,6 @@ import { signAccessToken } from "../utils/jwt";
 import { hashPassword, comparePassword} from "../utils/password";
 
 export const authRouter = Router();
-
-
 // Schema for user registration
 const registerSchema = z.object({
   name: z.string().min(3),
