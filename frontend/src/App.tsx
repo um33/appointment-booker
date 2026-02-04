@@ -1,28 +1,15 @@
-import { useState } from 'react'
-import connection from './api/client'
-import './App.css'
+import { Routes, Route, Navigate } from "react-router-dom";
+import ClientLogin from "./pages/login";
+import AdminDashboard from "./pages/adminDash";
+import ClientDashboard from "./pages/userDash";
 
-function App() {
-  const [healthStatus, setHealthStatus] = useState<string | null>(null);
-
-  const checkHealth = async () => {
-    try {
-      const data = await connection.getHealth();
-      setHealthStatus(`Service is healthy: ${JSON.stringify(data)}`);
-    } catch (error) {
-      setHealthStatus(`Service is unhealthy: ${error}`);
-    }
-  };
-
+export default function App() {
   return (
-    <div>
-      <h1>Backend Health Status</h1>
-      <button onClick={checkHealth}>
-        Check Health
-      </button>
-      <p>{healthStatus}</p>
-    </div>
-  )
+    <Routes>
+      <Route path="/" element={<ClientLogin />} />
+      <Route path="/dashboard/admin" element={<AdminDashboard />} />
+      <Route path="/dashboard/client" element={<ClientDashboard />} />
+      <Route path="*" element={<Navigate to="/" replace />} />
+    </Routes>
+  );
 }
-
-export default App
