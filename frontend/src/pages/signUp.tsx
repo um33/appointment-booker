@@ -4,8 +4,10 @@ import { useNavigate } from "react-router-dom";
 
 export function ClientLogin (){
     const navigate = useNavigate();
+    const [name, setName] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const [role, setRole] = useState("")
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState<string | null>(null)
 
@@ -15,9 +17,9 @@ export function ClientLogin (){
         setError(null)
         setLoading(true)
         try {
-            const res =await loginInfo.loginClient.login(email,password);
+            const res =await loginInfo.signUpClient.signUp(name, email, password,role);
             console.log(res.user)
-            navigate(res.user.role === "PROVIDER"? "/dashboard/admin":"/dashboard/client")
+            navigate("/")
                     
         } catch (err) {
             setError(err instanceof Error ? err.message : "Login failed");
@@ -31,10 +33,12 @@ export function ClientLogin (){
     return(
         <div>
          <form onSubmit={handelSubmit}>
+        <input type="name" value={name} onChange={(e)=>setName(e.target.value)} placeholder="Name"/>
          <input type="email" value={email} onChange={(e)=>setEmail(e.target.value)} placeholder="Email"/>
          <input type="password" value={password} onChange={(e)=>setPassword(e.target.value)} placeholder="Password"/>
+        <input type="role" value={role} onChange={(e)=>setRole(e.target.value)} placeholder="Role"/>
          <button type="submit" disabled={loading}>
-          {loading ? "Logging in..." : "Login"}
+          {loading ? "Signing in..." : "SignIn"}
             </button>
          </form>
          {error && <p style={{ color: "crimson" }}>{error}</p>}
