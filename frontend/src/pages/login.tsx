@@ -31,6 +31,7 @@ export function ClientLogin (){
     return(
         <div>
          <form onSubmit={handelSubmit}>
+        <h1>Welcome to the booking assistant.</h1>
          <input type="email" value={email} onChange={(e)=>setEmail(e.target.value)} placeholder="Email"/>
          <input type="password" value={password} onChange={(e)=>setPassword(e.target.value)} placeholder="Password"/>
          <button type="submit" disabled={loading}>
@@ -38,7 +39,8 @@ export function ClientLogin (){
             </button>
          </form>
          {error && <p style={{ color: "crimson" }}>{error}</p>}
-        </div>
+        </div>       
+
     )
 }
 export default ClientLogin
