@@ -5,7 +5,7 @@ import { AuthRequest, authMiddleware } from '../middleware/auth';
 export const homePageRouter = Router();
 
 // get to the home page after varyfying the user is authenticated
-homePageRouter.get('/homePage', authMiddleware, async (req: AuthRequest, res) => {
+homePageRouter.get('/homePage' ,authMiddleware, async (req: AuthRequest, res) => {
   const userId = req.user?.userId;
 
   if (!userId) {
