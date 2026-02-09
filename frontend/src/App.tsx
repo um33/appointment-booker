@@ -3,6 +3,7 @@ import ClientLogin from "./pages/login";
 import ClientSignUp from "./pages/signUp"
 import AdminDashboard from "./pages/adminDash";
 import ClientDashboard from "./pages/userDash";
+import "./App.css"
 
 export default function App() {
   return (
@@ -13,5 +14,6 @@ export default function App() {
       <Route path="/dashboard/client" element={<ClientDashboard />} />
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
+    
   );
 }
