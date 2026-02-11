@@ -18,6 +18,21 @@ model User {
   email        String   @unique
   passwordHash String
   role         UserRole @default(CUSTOMER)
+  businessId  String?  // Only for providers
+  business    Business? @relation(fields: [businessId], references: [id], onDelete:SetNull)
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
+}
+
+model Business {
+  id          String   @id @default(cuid())
+  name        String
+  slug        String   @unique
+  timezone    String
+  logoUrl     String?
+  primaryColor String?
+  secondaryColor String?
+  users       User[]   
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }
