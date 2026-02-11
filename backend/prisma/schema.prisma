@@ -28,7 +28,8 @@ model Business {
   id          String   @id @default(cuid())
   name        String
   slug        String   @unique
-  timezone    String
+  timezone       String   @default("Europe/Stockholm") 
+
   logoUrl     String?
   primaryColor String?
   secondaryColor String?
