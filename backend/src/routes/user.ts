@@ -63,8 +63,23 @@ authRouter.post("/login", async (req, res) => {
     const { email, passwordHash } = validated.data;
 
     const user = await prisma.user.findUnique({
-      where: { email },
-    });
+        where: { email },
+        include: {
+          business: {
+            select: {
+              id: true,
+              name: true,
+              slug: true,
+              logoUrl: true,
+              primaryColor: true,
+              secondaryColor: true,
+              createdAt: true,
+              updatedAt: true,
+            },
+          },
+        },
+      });
+
     if (!user) {
       return res.status(401).json({ error: "Invalid email or password" });
     }
@@ -77,5 +92,17 @@ authRouter.post("/login", async (req, res) => {
 
     // Assign the access token to the user
     const token =  signAccessToken({ userId: user.id, role: user.role });    
-    res.json({ user: { id: user.id, name: user.name, email: user.email, role: user.role, createdAt: user.createdAt }, token });
+    res.json({
+      user: {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        role: user.role,
+        createdAt: user.createdAt,
+        businessId: user.businessId,
+        business: user.business,
+      },
+      token,
+    });
+
 });
