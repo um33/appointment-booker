@@ -5,6 +5,8 @@ import {authRouter} from './routes/user';
 import {homePageRouter} from './routes/homePage';
 import { businessRouter } from './routes/business';
 import { serviceRouter } from './routes/service';
+import { availabilityRouter} from './routes/availability';
+
 import cors from 'cors';
 
 dotenv.config();
@@ -16,6 +18,7 @@ app.use ( "/auth",authRouter);
 app.use( "/api", homePageRouter);
 app.use("/api", businessRouter);
 app.use("/api", serviceRouter);
+app.use("/api", availabilityRouter);
 app
 const PORT = process.env.PORT || 3000;
 
