@@ -6,6 +6,7 @@ import {homePageRouter} from './routes/homePage';
 import { businessRouter } from './routes/business';
 import { serviceRouter } from './routes/service';
 import { availabilityRouter} from './routes/availability';
+import { slotGeneratorRouter } from './routes/slotGenerator';
 
 import cors from 'cors';
 
@@ -19,7 +20,7 @@ app.use( "/api", homePageRouter);
 app.use("/api", businessRouter);
 app.use("/api", serviceRouter);
 app.use("/api", availabilityRouter);
-app
+app.use("/api", slotGeneratorRouter);
 const PORT = process.env.PORT || 3000;
 
 
